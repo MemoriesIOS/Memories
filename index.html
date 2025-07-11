@@ -152,7 +152,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 0px;
+            padding: 1px;
         }
         
         .phone-screen img {
@@ -551,12 +551,7 @@
     </style>
 </head>
 <body>
-    <!-- Email notification -->
-    <div class="email-notification" id="emailNotification">
-        <button class="close-btn" onclick="closeEmailNotification()">&times;</button>
-        <strong>Email copied!</strong><br>
-        Contact us at: memories.app.ios@gmail.com
-    </div>
+
 
     <!-- Header -->
     <header>
@@ -751,7 +746,20 @@
         }
         
         function showEmailNotification() {
-            const notification = document.getElementById('emailNotification');
+            // Create notification element if it doesn't exist
+            let notification = document.getElementById('emailNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'emailNotification';
+                notification.className = 'email-notification';
+                notification.innerHTML = `
+                    <button class="close-btn" onclick="closeEmailNotification()">&times;</button>
+                    <strong>Email copied!</strong><br>
+                    Contact us at: memories.app.ios@gmail.com
+                `;
+                document.body.appendChild(notification);
+            }
+            
             notification.classList.add('show');
             
             // Auto-hide after 5 seconds
@@ -762,7 +770,9 @@
         
         function closeEmailNotification() {
             const notification = document.getElementById('emailNotification');
-            notification.classList.remove('show');
+            if (notification) {
+                notification.classList.remove('show');
+            }
         }
     </script>
 </body>
