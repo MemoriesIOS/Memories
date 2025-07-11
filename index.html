@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,6 +175,7 @@
             cursor: pointer;
             font-size: 1.1rem;
             box-shadow: var(--shadow);
+            margin: 5px;
         }
         
         .btn:hover {
@@ -184,6 +186,177 @@
         
         .btn i {
             margin-right: 8px;
+        }
+        
+        .btn-secondary {
+            background-color: var(--sage);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--dark-brown);
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: var(--cream);
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--sage) 0%, var(--taupe) 100%);
+            color: var(--cream);
+            padding: 20px 30px;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .close {
+            color: var(--cream);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+            line-height: 1.7;
+        }
+        
+        .modal-body h3 {
+            color: var(--dark-brown);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-body h3:first-child {
+            margin-top: 0;
+        }
+        
+        .modal-body p {
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+            opacity: 0.9;
+        }
+        
+        .modal-body ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .modal-body li {
+            margin-bottom: 8px;
+            color: var(--dark-brown);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, var(--beige) 0%, var(--sage) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: var(--dark-brown);
+            font-weight: 500;
+            border-left: 4px solid var(--taupe);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: #d32f2f;
+            font-weight: 500;
+            border-left: 4px solid #f44336;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--beige);
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--dark-brown);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            opacity: 1;
+            border-bottom-color: var(--taupe);
+            color: var(--taupe);
+        }
+        
+        .tab:hover {
+            opacity: 1;
+            background: rgba(178, 149, 128, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
         }
         
         /* Video Section */
@@ -507,6 +680,15 @@
             .central-play i {
                 font-size: 1.4rem;
             }
+            
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
         }
         
         @media (max-width: 600px) {
@@ -516,6 +698,12 @@
             
             .btn {
                 padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                align-items: center;
             }
             
             .video-section {
@@ -547,12 +735,93 @@
             .email-notification.show {
                 transform: translateY(0);
             }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: left;
+                border-bottom: 1px solid var(--beige);
+            }
+            
+            .modal-header {
+                padding: 15px 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.4rem;
+            }
         }
     </style>
+
+    <style>
+    /* Fix for modal backdrop blur performance */
+    .modal {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* Ensure modal content is properly centered on all screen sizes */
+    .modal-content {
+        animation: modalFadeIn 0.3s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Fix for scrollbar in modal body */
+    .modal-body {
+        scrollbar-width: thin;
+        scrollbar-color: var(--taupe) var(--beige);
+    }
+
+    .modal-body::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .modal-body::-webkit-scrollbar-track {
+        background: var(--beige);
+        border-radius: 10px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb {
+        background: var(--taupe);
+        border-radius: 10px;
+    }
+
+    .modal-body::-webkit-scrollbar-thumb:hover {
+        background: var(--dark-brown);
+    }
+
+    /* Fix for tab responsiveness */
+    @media (max-width: 600px) {
+        .tab-container {
+            border-bottom: 1px solid var(--beige);
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(178, 149, 128, 0.2);
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--taupe);
+        }
+    }
+</style>
+
 </head>
 <body>
-
-
     <!-- Header -->
     <header>
         <div class="container">
@@ -575,7 +844,10 @@
                     <h1>Create unforgettable moments together</h1>
                     <p>Our Memories is an intimate experience app for couples to discover new adventures, deepen connections, and capture precious moments.</p>
                     <p>Download for free, start living your relationship as if it was a movie, in a couple of seconds.</p>
-                    <a href="https://testflight.apple.com/join/xY4BBNUV" class="btn" target="_blank"><i class="fab fa-apple"></i> Download on iOS</a>
+                    <div class="button-group">
+                        <a href="https://testflight.apple.com/join/xY4BBNUV" class="btn" target="_blank"><i class="fab fa-apple"></i> Download on iOS</a>
+                        <button class="btn btn-secondary" onclick="openPrivacyModal()"><i class="fas fa-shield-alt"></i> Privacy Policy</button>
+                    </div>
                 </div>
                 <div class="hero-image">
                     <div class="phone-mockup">
@@ -587,6 +859,156 @@
             </div>
         </div>
     </section>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy & Terms of Service</h2>
+                <span class="close" onclick="closePrivacyModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="tab-container">
+                    <button class="tab active" onclick="showTab(event, 'privacy')">Privacy Policy</button>
+                    <button class="tab" onclick="showTab(event, 'terms')">Terms & Conditions</button>
+                </div>
+                
+                <div id="privacy" class="tab-content active">
+                    <h3><i class="fas fa-user-shield"></i> Data Controller</h3>
+                    <p>The individual responsible for handling and protecting your personal data – known as the data controller – is Paolo L., based in Italy. You can reach him at memories.app.ios@gmail.com.</p>
+                    
+                    <p>As per the European Union's General Data Protection Regulation (GDPR), we are accountable for ensuring your data is collected and handled lawfully, transparently, and for legitimate purposes only. This means that every piece of information we collect from you serves a specific purpose in making the app work effectively, and we are committed to being transparent about how we use it.</p>
+                    
+                    <h3><i class="fas fa-download"></i> What Kind of Data Do We Collect?</h3>
+                    <p>We make a strong effort to collect only the data that's strictly necessary for the app to work properly and to provide you with a meaningful experience. Our approach is built around the principle of data minimization – we believe in collecting less, not more.</p>
+                    
+                    <p>When you first sign up and set up your account, we collect what we consider required data. This includes your name as you enter it when you register, the email address that's linked to your Google account which we use for authentication purposes, and your couple name along with an invitation code that allows us to link you with your partner. These pieces of information are essential for the basic functionality of the app.</p>
+                    
+                    <p>Beyond this required information, there's optional data that we collect during your use of the app, but only if you choose to provide it. This might include nicknames you assign to yourself or your partner, comments and personal notes or diary entries you add inside the app, and challenge ratings or answers you provide in couple-based games.</p>
+                    
+                    <div class="highlight-box">
+                        <h3><i class="fas fa-camera"></i> Photo Storage</h3>
+                        <p>Regarding photos and media you upload, it's important to note that these are stored only on your device, not on our servers. We never have access to your personal photos, which means your visual memories remain completely private and under your control.</p>
+                    </div>
+                    
+                    <h3><i class="fas fa-cogs"></i> How Do We Use Your Data?</h3>
+                    <p>Your data is used solely for the purpose of making the app functional and enjoyable for you and your partner. This includes creating and managing your account so you can access all features, connecting you with your partner through the invitation code system we've developed, enabling app features such as memory albums, challenges, and ratings that make the experience meaningful, and providing internal insights that help us improve your experience without sharing any of your information externally.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>We want to be absolutely clear that we never sell or share your data with third parties for marketing or advertising purposes. Your information stays within our system and is used only to enhance your experience with Our Memories.</strong></p>
+                    </div>
+                    
+                    <h3><i class="fas fa-lock"></i> Data Storage and Retention</h3>
+                    <p>We are committed to keeping your data safe, which is why we've implemented several security measures. All communication between your device and our servers is protected by secure HTTPS encryption, ensuring that your data cannot be intercepted during transmission. Your data is stored on servers that employ strong security measures, including regular security audits and updates.</p>
+                    
+                    <p>Your personal data is kept only as long as your account remains active. If you ever decide to delete your account or withdraw your consent for us to process your data, you can simply delete your account through the Application. This process is irreversible, so we encourage you to export any data you might want to keep before requesting deletion.</p>
+                    
+                    <h3><i class="fas fa-hand-paper"></i> Your Rights Under GDPR</h3>
+                    <p>You have full control over your data and can exercise several rights at any time. You can request to see exactly what data we hold about you, ask us to delete all of your personal data, or withdraw your consent for us to process your information. To exercise any of these rights, simply contact us at memories.app.ios@gmail.com, and we will respond to your request promptly.</p>
+                    
+                    <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                    <p>If you have questions, feedback, or requests related to your privacy, please don't hesitate to reach out to us at memories.app.ios@gmail.com. We're committed to addressing your concerns and ensuring you feel comfortable with how we handle your data.</p>
+                </div>
+                
+                <div id="terms" class="tab-content">
+                    <p><strong>Last updated: June 8, 2025</strong></p>
+                    
+                    <h3><i class="fas fa-handshake"></i> Agreement to the Terms</h3>
+                    <p>By downloading or using the Our Memories app, you're agreeing to comply with and be legally bound by these Terms and Conditions. These terms represent a legal agreement between you and us, and they govern your use of our service. If you do not agree with any part of these terms, please do not use the app, as your use constitutes acceptance of these conditions.</p>
+                    
+                    <h3><i class="fas fa-user-plus"></i> Registration and User Setup</h3>
+                    <p>We use Google sign-in OAuth technology to make registration both fast and secure for our users. This system allows us to verify your identity without storing your Google password, which enhances security for everyone involved. When you register through this system, we collect your Google email address for authentication purposes, along with your name and your couple nickname, which you enter manually during the setup process.</p>
+                    
+                    <p>You're responsible for making sure the information you provide during registration is accurate and up to date. You also agree to keep your account secure by not sharing your login credentials with others and by maintaining the confidentiality of any account information. If you suspect your account has been compromised, please contact us immediately.</p>
+                    
+                    <h3><i class="fas fa-users-cog"></i> User Responsibility and Consent</h3>
+                    <div class="warning-box">
+                        <p><strong>IMPORTANT: This app is designed for consenting adults in committed relationships. By using this app, you acknowledge and agree to the following:</strong></p>
+                    </div>
+                    
+                    <ul>
+                        <li>You are at least 18 years of age and legally capable of entering into binding agreements</li>
+                        <li>You will only engage in activities with consenting partners who are also at least 18 years of age</li>
+                       <li>You understand that all activities suggested by the app are recommendations only, and you have full discretion to accept or decline any suggestion</li>
+                       <li>You will always prioritize safety, consent, and mutual respect in your relationships</li>
+                       <li>You will not use the app to coerce, manipulate, or pressure anyone into any activity</li>
+                   </ul>
+                   
+                   <div class="highlight-box">
+                       <p><strong>Mutual consent is essential for healthy relationships. Always communicate openly with your partner, respect boundaries, and ensure that both parties are comfortable with any activities.</strong></p>
+                   </div>
+                   
+                   <h3><i class="fas fa-shield-alt"></i> Safety Guidelines and Prohibited Uses</h3>
+                   <p>Your safety and well-being are paramount. You agree to:</p>
+                   
+                   <ul>
+                       <li>Use the app responsibly and in accordance with all applicable laws</li>
+                       <li>Never engage in any illegal, harmful, or non-consensual activities</li>
+                       <li>Respect your partner's boundaries and communicate openly about comfort levels</li>
+                       <li>Stop any activity immediately if you or your partner feel uncomfortable</li>
+                       <li>Not use the app to facilitate or engage in any form of abuse, harassment, or exploitation</li>
+                       <li>Not share account access with minors or allow minors to use the app</li>
+                   </ul>
+                   
+                   <div class="warning-box">
+                       <p><strong>PROHIBITED: Using this app for any illegal activities, non-consensual acts, or activities involving minors is strictly forbidden</strong></p>
+                   </div>
+                   
+                   <h3><i class="fas fa-file-alt"></i> Your Content and Ownership</h3>
+                   <p>You own the content you create within the app, but by using Our Memories, you give us permission to use that content only as needed to provide the service to you. This means you grant us a non-exclusive, royalty-free, global license to display and process your text, notes, or interactions within the app's functionality.</p>
+                   
+                   <div class="highlight-box">
+                       <h4><i class="fas fa-camera"></i> Photo Ownership</h4>
+                       <p>Photos deserve special mention here because they are not stored or processed on our servers, so this license doesn't apply to them in the same way it applies to text content. Your photos remain entirely under your control and ownership.</p>
+                   </div>
+                   
+                   <h3><i class="fas fa-exclamation-triangle"></i> Limitation of Liability and Disclaimer</h3>
+                   <div class="warning-box">
+                       <p><strong>IMPORTANT DISCLAIMER: We provide this app as a tool for entertainment and relationship enhancement, but we cannot and do not take responsibility for how you choose to use it.</strong></p>
+                   </div>
+                   
+                   <p>We do our best to provide a stable, reliable app experience, but we want to be transparent about the limitations of what we can guarantee. The app is provided 'as is', without guarantees of performance, uptime, or uninterrupted service.</p>
+                   
+                   <p>We are NOT responsible for:</p>
+                   <ul>
+                       <li>Any physical, emotional, or psychological harm resulting from activities suggested by or facilitated through the app</li>
+                       <li>Misuse of the app or its features by users</li>
+                       <li>Relationship conflicts or issues that may arise from using the app</li>
+                       <li>Any illegal activities conducted by users</li>
+                       <li>Any loss of data, service interruptions, or technical issues</li>
+                       <li>Actions taken by users that violate consent or cause harm to others</li>
+                   </ul>
+                   
+                   <div class="warning-box">
+                       <p><strong>BY USING THIS APP, YOU ACKNOWLEDGE THAT YOU ARE SOLELY RESPONSIBLE FOR YOUR ACTIONS AND DECISIONS. You agree to hold us harmless from any claims, damages, or losses arising from your use of the app.</strong></p>
+                   </div>
+                   
+                   <h3><i class="fas fa-times-circle"></i> Account Termination</h3>
+                   <p>We reserve the right to terminate or suspend your account immediately, without prior notice, if you violate these Terms of Service, engage in prohibited activities, or misuse the app in any way. You may also delete your account at any time through the app settings.</p>
+                   
+                   <p>Upon termination, your right to use the app will cease immediately, and we may delete your account data in accordance with our Privacy Policy.</p>
+               </div>
+               <div class="terms-completion">
+                   <h3><i class="fas fa-edit"></i> Changes to Terms</h3>
+                   <p>We may update these Terms of Service from time to time. When we do, we will post the updated terms on this page and update the "Last updated" date at the top of these terms. We encourage you to review these terms periodically to stay informed about our policies.</p>
+                   
+                   <p>Your continued use of the app after any changes to these terms constitutes your acceptance of the new terms. If you do not agree to the updated terms, please discontinue use of the app.</p>
+                   
+                   <h3><i class="fas fa-gavel"></i> Governing Law</h3>
+                   <p>These terms are governed by the laws of Italy, where our data controller is based. Any disputes arising from these terms or your use of the app will be resolved in accordance with Italian law.</p>
+                   
+                   <h3><i class="fas fa-phone"></i> Contact Information</h3>
+                   <p>If you have any questions about these Terms of Service, please contact us at memories.app.ios@gmail.com. We're here to help clarify any concerns you may have about using our app responsibly.</p>
+                   
+                   <div class="highlight-box">
+                       <p><strong>Remember: Your safety, consent, and well-being are always the top priority. Use Our Memories responsibly and enjoy creating beautiful memories together!</strong></p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
 
     <!-- Video Section -->
     <section class="video-section">
@@ -775,5 +1197,58 @@
             }
         }
     </script>
+
+    <script>
+        // Privacy Policy Modal Functions
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Tab switching functionality
+        function showTab(event, tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('privacyModal');
+            if (event.target === modal) {
+                closePrivacyModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('privacyModal');
+                if (modal.style.display === 'block') {
+                    closePrivacyModal();
+                }
+            }
+        });
+</script>
+
 </body>
 </html>
