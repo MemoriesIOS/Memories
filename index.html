@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memories</title>
+    <title>Our Memories</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -152,7 +152,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 1px;
+            padding: 0px;
         }
         
         .phone-screen img {
@@ -409,6 +409,7 @@
             color: var(--beige);
             border-radius: 50%;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
         
         .social-links a:hover {
@@ -443,6 +444,35 @@
             border-top: 1px solid rgba(232, 210, 180, 0.1);
             font-size: 0.9rem;
             opacity: 0.7;
+        }
+        
+        /* Email notification */
+        .email-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--dark-brown);
+            color: var(--cream);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .email-notification.show {
+            transform: translateX(0);
+        }
+        
+        .email-notification .close-btn {
+            background: none;
+            border: none;
+            color: var(--cream);
+            font-size: 1.2rem;
+            cursor: pointer;
+            float: right;
+            margin-left: 10px;
         }
         
         /* Responsive Design */
@@ -507,10 +537,27 @@
             .floating-element {
                 display: none;
             }
+            
+            .email-notification {
+                right: 10px;
+                left: 10px;
+                transform: translateY(-100%);
+            }
+            
+            .email-notification.show {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Email notification -->
+    <div class="email-notification" id="emailNotification">
+        <button class="close-btn" onclick="closeEmailNotification()">&times;</button>
+        <strong>Email copied!</strong><br>
+        Contact us at: memories.app.ios@gmail.com
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -519,7 +566,7 @@
                     <div class="logo-icon">
                         <img src="assets/MemoriesLogo.png" alt="Memories Logo">
                     </div>
-                    <div class="logo-text">Memories</div>
+                    <div class="logo-text">Our Memories</div>
                 </div>
             </div>
         </div>
@@ -531,9 +578,9 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Create unforgettable moments together</h1>
-                    <p>Memories is an intimate experience app for couples to discover new adventures, deepen connections, and capture precious moments.</p>
+                    <p>Our Memories is an intimate experience app for couples to discover new adventures, deepen connections, and capture precious moments.</p>
                     <p>Download for free, start living your relationship as if it was a movie, in a couple of seconds.</p>
-                    <a href="#" class="btn"><i class="fab fa-apple"></i> Download on iOS</a>
+                    <a href="https://testflight.apple.com/join/xY4BBNUV" class="btn" target="_blank"><i class="fab fa-apple"></i> Download on iOS</a>
                 </div>
                 <div class="hero-image">
                     <div class="phone-mockup">
@@ -555,7 +602,7 @@
         <div class="container">
             <div class="video-container">
                 <div class="video-intro">
-                    <h2>See Memories in Action</h2>
+                    <h2>See Our Memories in Action</h2>
                     <p>Watch how couples are transforming their relationships with our unique experience-sharing platform</p>
                 </div>
                 
@@ -584,18 +631,18 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h4>Memories</h4>
+                    <h4>Our Memories</h4>
                     <p>An app designed to help couples create, capture, and cherish their most intimate and joyful moments together.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fas fa-envelope"></i></a>
+                        <a href="https://instagram.com/ourmemories.app" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="#" onclick="copyEmailAndNotify(event)"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Memories App. All rights reserved. Designed for you.</p>
+                <p>&copy; 2025 Our Memories App. All rights reserved. Designed for you.</p>
             </div>
         </div>
     </footer>
@@ -662,6 +709,61 @@
                 }
             }
         });
+
+        // Email functionality
+        function copyEmailAndNotify(event) {
+            event.preventDefault();
+            
+            const email = 'memories.app.ios@gmail.com';
+            
+            // Try to copy to clipboard
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(() => {
+                    showEmailNotification();
+                }).catch(() => {
+                    // If copying fails, try alternative method
+                    fallbackCopyEmail(email);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyEmail(email);
+            }
+        }
+        
+        function fallbackCopyEmail(email) {
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = email;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showEmailNotification();
+            } catch (err) {
+                // If all copying methods fail, show email in alert
+                alert('Email: ' + email);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+        
+        function showEmailNotification() {
+            const notification = document.getElementById('emailNotification');
+            notification.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+        
+        function closeEmailNotification() {
+            const notification = document.getElementById('emailNotification');
+            notification.classList.remove('show');
+        }
     </script>
 </body>
 </html>
