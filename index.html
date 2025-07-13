@@ -621,21 +621,17 @@
         
         /* Email notification */
         .email-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--dark-brown);
-            color: var(--cream);
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
+                right: 10px;
+                left: 10px;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+            }
         
         .email-notification.show {
             transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
         }
         
         .email-notification .close-btn {
@@ -1011,6 +1007,7 @@
 
 
     <!-- Video Section -->
+    <!--
     <section class="video-section">
         <div class="floating-element"></div>
         <div class="floating-element"></div>
@@ -1042,6 +1039,7 @@
             </div>
         </div>
     </section>
+    -->
 
     <!-- Footer -->
     <footer>
@@ -1065,7 +1063,8 @@
     </footer>
 
     <script>
-        // Get elements
+        // Get elements - commented out since video section is disabled
+        /*
         const videoElement = document.getElementById('videoElement');
         const videoOverlay = document.getElementById('videoOverlay');
         const centralPlay = document.getElementById('centralPlay');
@@ -1126,6 +1125,7 @@
                 }
             }
         });
+        */
 
         // Email functionality
         function copyEmailAndNotify(event) {
@@ -1182,11 +1182,16 @@
                 document.body.appendChild(notification);
             }
             
+            // Reset any previous states
+            notification.classList.remove('show');
+            // Force reflow
+            notification.offsetHeight;
+            // Add show class
             notification.classList.add('show');
             
             // Auto-hide after 5 seconds
             setTimeout(() => {
-                notification.classList.remove('show');
+                closeEmailNotification();
             }, 5000);
         }
         
@@ -1194,6 +1199,14 @@
             const notification = document.getElementById('emailNotification');
             if (notification) {
                 notification.classList.remove('show');
+                // Ensure complete cleanup after animation
+                setTimeout(() => {
+                    if (notification && !notification.classList.contains('show')) {
+                        notification.style.transform = '';
+                        notification.style.opacity = '0';
+                        notification.style.visibility = 'hidden';
+                    }
+                }, 300); // Match the transition duration
             }
         }
     </script>
